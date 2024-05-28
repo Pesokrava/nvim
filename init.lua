@@ -1,3 +1,2 @@
-require("martin.remap")
-require("martin.packer")
-require('monokai').setup { palette = require('monokai').pro }
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
