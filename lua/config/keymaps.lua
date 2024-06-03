@@ -10,7 +10,6 @@ end
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 vim.keymap.set("n", "wO", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 vim.keymap.set("n", "wo", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
 
