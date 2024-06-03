@@ -22,8 +22,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank into system clipboard"})
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank into system clipboard"})
-vim.keymap.set("n", "<leader>y", '"+p', { desc = "Paste from system clipboard"})
-vim.keymap.set("v", "<leader>y", '"+p', { desc = "Paste from system clipboard"})
+vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste from system clipboard"})
+vim.keymap.set("v", "<leader>p", '"+p', { desc = "Paste from system clipboard"})
 
 vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, { desc = "Refactor" })
 -- vim.keymap.set("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
