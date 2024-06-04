@@ -4,10 +4,13 @@ return {
     "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui",
     "leoluz/nvim-dap-go",
+    "mfussenegger/nvim-dap-python",
     "theHamsta/nvim-dap-virtual-text",
   },
   config = function()
     local dap, dapui = require("dap"), require("dapui")
+    local dpy_path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+    require("dap-python").setup(dpy_path)
 
     require("dap-go").setup()
     dapui.setup()
