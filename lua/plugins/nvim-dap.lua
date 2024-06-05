@@ -33,5 +33,7 @@ return {
     vim.keymap.set("n", "<leader>dn", dap.step_over, { desc = "Next" })
     vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
     vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Step out" })
+    vim.keymap.set("n", "<leader>duo", dapui.open, { desc = "Open debug windows" })
+    vim.keymap.set("n", "<leader>duc", dapui.close, { desc = "Close debug windows" })
   end,
 }

@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.opt.nu = true
 vim.g.autoformat = false
+vim.opt.clipboard = ""
