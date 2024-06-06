@@ -6,6 +6,7 @@ return {
       ensure_installed = {
         "bash",
         "html",
+        "glsl",
         "go",
         "javascript",
         "json",
