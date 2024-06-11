@@ -41,18 +41,19 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "gruvbox",
-  callback = function()
-    -- Customize function highlighting to remove bold
-    local function_hl = vim.api.nvim_get_hl_by_name("Function", true)
-    function_hl.bold = nil
-    vim.api.nvim_set_hl(0, "Function", function_hl)
 
-    -- Define a darker green color (modify the hex value as desired)
-    local dark_green = "#16ac3c"
-
-    -- Customize string highlighting to use the darker green color
-    vim.api.nvim_set_hl(0, "String", { fg = dark_green, italic = true })
-  end,
-})
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--   pattern = "gruvbox",
+--   callback = function()
+--     -- Customize function highlighting to remove bold
+--     local function_hl = vim.api.nvim_get_hl_by_name("Function", true)
+--     function_hl.bold = nil
+--     vim.api.nvim_set_hl(0, "Function", function_hl)
+--
+--     -- Define a darker green color (modify the hex value as desired)
+--     local dark_green = "#16ac3c"
+--
+--     -- Customize string highlighting to use the darker green color
+--     vim.api.nvim_set_hl(0, "String", { fg = dark_green, italic = true })
+--   end,
+-- })

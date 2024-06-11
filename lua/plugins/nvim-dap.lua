@@ -11,7 +11,7 @@ return {
     local dap, dapui = require("dap"), require("dapui")
     local dpy_path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
     require("dap-python").setup(dpy_path)
-
+    require("nvim-dap-virtual-text").setup({})
     require("dap-go").setup()
     dapui.setup()
     dap.listeners.before.attach.dapui_config = function()
