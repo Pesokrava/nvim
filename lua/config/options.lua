@@ -4,3 +4,4 @@
 vim.opt.nu = true
 vim.g.autoformat = false
 vim.opt.clipboard = ""
+vim.o.autoread = true
