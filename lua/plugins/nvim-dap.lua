@@ -3,6 +3,7 @@ return {
   dependencies = {
     "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui",
+    "Weissle/persistent-breakpoints.nvim",
     "leoluz/nvim-dap-go",
     "mfussenegger/nvim-dap-python",
     "theHamsta/nvim-dap-virtual-text",
@@ -13,6 +14,9 @@ return {
     require("dap-python").setup(dpy_path)
     require("nvim-dap-virtual-text").setup({})
     require("dap-go").setup()
+    require("persistent-breakpoints").setup({
+      load_breakpoints_event = { "BufReadPost" },
+    })
     dapui.setup()
     dap.listeners.before.attach.dapui_config = function()
       dapui.open()
@@ -20,14 +24,35 @@ return {
     dap.listeners.before.launch.dapui_config = function()
       dapui.open()
     end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
-    end
+    -- dap.listeners.before.event_terminated.dapui_config = function()
+    --   dapui.close()
+    -- end
+    -- dap.listeners.before.event_exited.dapui_config = function()
+    --   dapui.close()
+    -- end
+    vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapStopped", { text = "▶️", texthl = "", linehl = "", numhl = "" })
 
-    vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "Toggle breakpoint at current line" })
+    -- key bindings
+    vim.keymap.set(
+      "n",
+      "<leader>dt",
+      "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>",
+      { desc = "Toggle breakpoint at current line" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>dT",
+      "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>",
+      { desc = "Toggle conditional breakpoint at current line" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>dr",
+      "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
+      { desc = "Clear all breakpoints" }
+    )
+    vim.keymap.set("n", "<leader>de", "<cmd>lua require('dapui').eval()<cr>", { desc = "Eval current cursor position" })
     vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue in debug mode" })
     vim.keymap.set("n", "<leader>ds", dap.close, { desc = "Stop debugging" })
     vim.keymap.set("n", "<leader>dn", dap.step_over, { desc = "Next" })

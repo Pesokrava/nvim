@@ -9,6 +9,7 @@ return {
         "glsl",
         "go",
         "javascript",
+        "java",
         "json",
         "lua",
         "markdown",
