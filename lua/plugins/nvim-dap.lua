@@ -52,6 +52,9 @@ return {
       "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
       { desc = "Clear all breakpoints" }
     )
+    vim.keymap.set("n", "<leader>dl", function()
+      dap.toggle_breakpoint(nil, nil, vim.fn.input("Log message > "))
+    end, { desc = "Toggle logpoint" })
     vim.keymap.set("n", "<leader>de", "<cmd>lua require('dapui').eval()<cr>", { desc = "Eval current cursor position" })
     vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue in debug mode" })
     vim.keymap.set("n", "<leader>ds", dap.close, { desc = "Stop debugging" })
