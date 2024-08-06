@@ -29,5 +29,20 @@ vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste from system clipboard" }
 vim.keymap.set("v", "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 
 vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, { desc = "Refactor" })
+
+vim.keymap.set("n", "<leader>cui", "<cmd>TransferInit<cr>", { desc = "Init transfer in the current repo" })
+vim.keymap.set("n", "<leader>cuf", "<cmd>DiffRemote<cr>", { desc = "Remote diff of the current file" })
+vim.keymap.set("n", "<leader>cuu", "<cmd>TransferUpload<cr>", { desc = "Upload current file to remote" })
+vim.keymap.set("n", "<leader>cud", "<cmd>TransferDownload<cr>", { desc = "Download current file from remote" })
 -- vim.keymap.set("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- quick kebinding to hide virtual text
+local isLspDiagnosticsVisible = true
+vim.keymap.set("n", "<leader>cx", function()
+  isLspDiagnosticsVisible = not isLspDiagnosticsVisible
+  vim.diagnostic.config({
+    virtual_text = isLspDiagnosticsVisible,
+    underline = isLspDiagnosticsVisible,
+  })
+end, { desc = "Hide virtual text LSP" })

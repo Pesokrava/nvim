@@ -1,3 +1,4 @@
+-- complete dap config
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
@@ -6,6 +7,7 @@ return {
     "Weissle/persistent-breakpoints.nvim",
     "leoluz/nvim-dap-go",
     "mfussenegger/nvim-dap-python",
+    "ldelossa/nvim-dap-projects",
     "theHamsta/nvim-dap-virtual-text",
   },
   config = function()
@@ -17,6 +19,7 @@ return {
     require("persistent-breakpoints").setup({
       load_breakpoints_event = { "BufReadPost" },
     })
+    require("nvim-dap-projects").search_project_config()
     dapui.setup()
     dap.listeners.before.attach.dapui_config = function()
       dapui.open()
