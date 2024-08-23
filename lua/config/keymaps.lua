@@ -37,6 +37,8 @@ vim.keymap.set("n", "<leader>cud", "<cmd>TransferDownload<cr>", { desc = "Downlo
 -- vim.keymap.set("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+vim.keymap.set("n", "<leader>fh", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-u<cr>", { desc = "Find all files" })
+
 -- quick kebinding to hide virtual text
 local isLspDiagnosticsVisible = true
 vim.keymap.set("n", "<leader>cx", function()
