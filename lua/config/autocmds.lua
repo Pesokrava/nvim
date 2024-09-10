@@ -57,7 +57,11 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 -- Autocmd to keep neotree on the right side
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    vim.cmd("Neotree filesystem reveal right")
+    -- Check if the argument is a directory
+    local arg = vim.fn.argv(0)
+    if vim.fn.isdirectory(arg) == 1 then
+      vim.cmd("Neotree filesystem reveal right")
+    end
   end,
 })
 -- vim.api.nvim_create_autocmd("ColorScheme", {
