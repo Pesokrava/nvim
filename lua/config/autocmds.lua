@@ -46,6 +46,20 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
   pattern = { "*" },
 })
 
+-- Autocmd to assign groovy to Jenkinsfiles
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "Jenkinsfile" },
+  callback = function()
+    vim.bo.filetype = "groovy"
+  end,
+})
+
+-- Autocmd to keep neotree on the right side
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.cmd("Neotree filesystem reveal right")
+  end,
+})
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 --   pattern = "gruvbox",
 --   callback = function()
