@@ -55,6 +55,7 @@ return {
       "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
       { desc = "Clear all breakpoints" }
     )
+    vim.keymap.set("n", "<leader>dh", "<cmd>DapVirtualTextToggle<cr>", { desc = "Hide dap virtual text"})
     vim.keymap.set("n", "<leader>dl", function()
       dap.toggle_breakpoint(nil, nil, vim.fn.input("Log message > "))
     end, { desc = "Toggle logpoint" })

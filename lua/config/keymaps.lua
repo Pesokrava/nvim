@@ -38,6 +38,7 @@ vim.keymap.set("n", "<leader>cud", "<cmd>TransferDownload<cr>", { desc = "Downlo
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-u<cr>", { desc = "Find all files" })
+vim.keymap.set("n", "<leader>fG", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", { desc = "Live grep with args" })
 
 -- quick kebinding to hide virtual text
 local isLspDiagnosticsVisible = true
