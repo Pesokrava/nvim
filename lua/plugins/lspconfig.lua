@@ -3,7 +3,6 @@ return {
     "neovim/nvim-lspconfig",
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      keys[#keys + 1] = { "K", "i<CR><Esc>", { noremap = true } }
     end,
     ---@class PluginLspOpts
     opts = {
@@ -31,16 +30,16 @@ return {
         },
 
         -- Add Go Language Server (gopls) configuration
-        gopls = {
-          settings = {
-            gopls = {
-              analyses = {
-                unusedparams = true,
-              },
-              staticcheck = true,
-            },
-          },
-        },
+        -- gopls = {
+        --   settings = {
+        --     gopls = {
+        --       analyses = {
+        --         unusedparams = true,
+        --       },
+        --       staticcheck = true,
+        --     },
+        --   },
+        -- },
         yamlls = {
           -- Have to add this for yamlls to understand that we support line folding
           capabilities = {
