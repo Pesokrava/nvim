@@ -50,9 +50,6 @@ vim.keymap.set(
   { desc = "Live grep with args" }
 )
 
--- autoimport
-vim.keymap.set("n", "<leader>i", require("lspimport").import, { noremap = true, desc = "Autoimport" })
-
 -- quick kebinding to hide virtual text
 local isLspDiagnosticsVisible = true
 vim.keymap.set("n", "<leader>cx", function()
@@ -63,52 +60,5 @@ vim.keymap.set("n", "<leader>cx", function()
   })
 end, { desc = "Hide virtual text LSP" })
 
-
--- below is setup for toggling neotree position
-
--- Path to the file that stores the Neo-tree position
-local position_file = vim.fn.stdpath('config') .. '/neotree_position.txt'
-
--- Function to read the Neo-tree position from the file
-local function read_neotree_position()
-  local file = io.open(position_file, "r")
-  if file then
-    local position = file:read("*a")
-    file:close()
-    return position
-  end
-  return 'left' -- Default position if file does not exist
-end
-
--- Function to write the Neo-tree position to the file
-local function write_neotree_position(position)
-  local file = io.open(position_file, "w")
-  if file then
-    file:write(position)
-    file:close()
-  end
-end
-
--- Function to toggle Neo-tree position between left and right
-function Toggle_neotree_position()
-  -- Read the current position from the file
-  local current_position = read_neotree_position()
-
-  -- Toggle position
-  if current_position == 'left' then
-    -- Close current Neo-tree and open it on the right
-
-    vim.cmd("Neotree close")
-    vim.cmd("Neotree filesystem reveal right")
-    write_neotree_position('right')
-  else
-    -- Close current Neo-tree and open it on the left
-    vim.cmd("Neotree close")
-    vim.cmd("Neotree filesystem reveal left")
-    write_neotree_position('left')
-  end
-end
-
 -- Key mapping to toggle Neo-tree position with <leader>rt
-vim.api.nvim_set_keymap('n', '<leader>rt', ':lua Toggle_neotree_position()<CR>', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<leader>rt', ':lua require("config.utils").Toggle_neotree_position()<CR>', { noremap = true, silent = true })
