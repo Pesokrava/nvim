@@ -5,21 +5,11 @@ return {
     opts = {
       ensure_installed = {
         "bash",
-        "html",
-        "glsl",
-        "go",
-        "javascript",
-        "java",
         "json",
-        "lua",
         "markdown",
         "markdown_inline",
         "python",
         "query",
-        "regex",
-        "tsx",
-        "typescript",
-        "vim",
         "yaml",
       },
     },
@@ -33,10 +23,7 @@ return {
     opts = function(_, opts)
       -- add tsx and treesitter
       vim.list_extend(opts.ensure_installed, {
-        "go",
         "python",
-        "tsx",
-        "typescript",
       })
     end
   },

@@ -5,7 +5,6 @@ return {
     "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui",
     "Weissle/persistent-breakpoints.nvim",
-    "leoluz/nvim-dap-go",
     "mfussenegger/nvim-dap-python",
     "ldelossa/nvim-dap-projects",
     "theHamsta/nvim-dap-virtual-text",
@@ -15,7 +14,6 @@ return {
     local dpy_path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
     require("dap-python").setup(dpy_path)
     require("nvim-dap-virtual-text").setup({})
-    require("dap-go").setup()
     require("persistent-breakpoints").setup({
       load_breakpoints_event = { "BufReadPost" },
     })

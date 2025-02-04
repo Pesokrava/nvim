@@ -29,17 +29,6 @@ return {
           },
         },
 
-        -- Add Go Language Server (gopls) configuration
-        -- gopls = {
-        --   settings = {
-        --     gopls = {
-        --       analyses = {
-        --         unusedparams = true,
-        --       },
-        --       staticcheck = true,
-        --     },
-        --   },
-        -- },
         yamlls = {
           -- Have to add this for yamlls to understand that we support line folding
           capabilities = {
