@@ -18,7 +18,7 @@ vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete into black hole" })
 
 vim.keymap.set("n", "gh", vim.lsp.buf.hover)
 vim.keymap.set("n", "J", "mzJ`z`")
-vim.keymap.set("n", "L", "i<CR><Esc>", { noremap = true })
+vim.keymap.set("n", "K", "i<CR><Esc>", { noremap = true })
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
