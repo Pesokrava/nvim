@@ -37,6 +37,36 @@ return {
           }),
         },
       })
+
+      vim.keymap.set("n", "<leader>tS", "<cmd>Neotest summary<cr>", { desc = "Test summaries" })
+      vim.keymap.set("n", "<leader>tO", "<cmd>Neotest output-panel<cr>", { desc = "Show test output panel" })
+      vim.keymap.set("n", "<leader>to", "<cmd>Neotest output<cr>", { desc = "Show test output" })
+      vim.keymap.set("n", "<leader>ts", "<cmd>Neotest stop<cr>", { desc = "Stop test" })
+      vim.keymap.set(
+        "n",
+        "<leader>tF",
+        '<cmd>lua require("neotest").run.run({vim.fn.expand("%"), strategy = "dap"})<cr>',
+        { desc = "Run the current file test in debug mode" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>tf",
+        '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>',
+        { desc = "Run the current file test" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>tn",
+        '<cmd>lua require("neotest").run.run({strategy = "dap"})<cr>',
+        { desc = "Run the nearest test in debug mode" }
+      )
+      vim.keymap.set("n", "<leader>tn", '<cmd>lua require("neotest").run.run()<cr>', { desc = "Run the nearest test" })
+      vim.keymap.set(
+        "n",
+        "<leader>tl",
+        '<cmd>lua require("neotest").run.run_last()<cr>',
+        { desc = "Run the last test again" }
+      )
     end,
   },
 }
