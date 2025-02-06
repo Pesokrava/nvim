@@ -56,7 +56,7 @@ return {
       )
       vim.keymap.set(
         "n",
-        "<leader>tn",
+        "<leader>tN",
         '<cmd>lua require("neotest").run.run({strategy = "dap"})<cr>',
         { desc = "Run the nearest test in debug mode" }
       )
