@@ -4,7 +4,7 @@ return {
   dependencies = {
     "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui",
-    "Weissle/persistent-breakpoints.nvim",
+    -- "Weissle/persistent-breakpoints.nvim",
     "mfussenegger/nvim-dap-python",
     "ldelossa/nvim-dap-projects",
     "theHamsta/nvim-dap-virtual-text",
@@ -14,9 +14,9 @@ return {
     local dpy_path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
     require("dap-python").setup(dpy_path)
     require("nvim-dap-virtual-text").setup({})
-    require("persistent-breakpoints").setup({
-      load_breakpoints_event = { "BufReadPost" },
-    })
+    -- require("persistent-breakpoints").setup({
+    --   load_breakpoints_event = { "BufReadPost" },
+    -- })
     require("nvim-dap-projects").search_project_config()
     dapui.setup()
     dap.listeners.before.attach.dapui_config = function()
@@ -38,21 +38,21 @@ return {
     vim.keymap.set(
       "n",
       "<leader>dt",
-      "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>",
+      "<cmd>lua require('dap').toggle_breakpoint()<cr>",
       { desc = "Toggle breakpoint at current line" }
     )
     vim.keymap.set(
       "n",
       "<leader>dT",
-      "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>",
+      "<cmd>lua require('dap').toggle_breakpoint(vim.fn.input('Input condition: '))<cr>",
       { desc = "Toggle conditional breakpoint at current line" }
     )
-    vim.keymap.set(
-      "n",
-      "<leader>dr",
-      "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
-      { desc = "Clear all breakpoints" }
-    )
+    -- vim.keymap.set(
+    --   "n",
+    --   "<leader>dr",
+    --   "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
+    --   { desc = "Clear all breakpoints" }
+    -- )
     vim.keymap.set("n", "<leader>dh", "<cmd>DapVirtualTextToggle<cr>", { desc = "Hide dap virtual text"})
     vim.keymap.set("n", "<leader>dl", function()
       dap.toggle_breakpoint(nil, nil, vim.fn.input("Log message > "))
