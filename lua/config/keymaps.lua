@@ -69,29 +69,15 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
-function _G.set_trace()
-  if vim.bo.filetype == "python" then
-    -- Check if 'import ipdb' is in the file
-    local ipdb_present = false
-    for i = 1, vim.fn.line("$") do
-      if string.find(vim.fn.getline(i), "import ipdb") then
-        ipdb_present = true
-        break
-      end
-    end
-
-    -- If 'import ipdb' is not in the file, add it at the beginning
-    if not ipdb_present then
-      vim.api.nvim_buf_set_lines(0, 0, 0, false, { "import ipdb" })
-    end
-
-    -- Get the current line's indentation
-    local indent = vim.fn.indent(".")
-    local spaces = string.rep(" ", indent)
-
-    -- Add 'ipdb.set_trace()' at the current line with the correct indentation
-    vim.api.nvim_put({ spaces .. "ipdb.set_trace()" }, "l", true, true)
-  end
-end
-
-vim.api.nvim_set_keymap("n", "<leader>d", ":lua set_trace()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>dw",
+  ":lua set_trace()<CR>",
+  { noremap = true, silent = true, desc = "Ipdb breakpoint" }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>dq",
+  ":lua clear_trace()<CR>",
+  { noremap = true, silent = true, desc = "Clear all ipdb breakpoints" }
+)
