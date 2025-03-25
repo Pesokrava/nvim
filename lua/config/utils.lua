@@ -61,9 +61,14 @@ function _G.set_trace()
       end
     end
 
-    -- If 'import ipdb' is not in the file, add it at the beginning
+    -- If 'import ipdb' is not in the file, add it at the beginning or second line
     if not ipdb_present then
-      vim.api.nvim_buf_set_lines(0, 0, 0, false, { "import ipdb" })
+      local first_line = vim.fn.getline(1)
+      if first_line == "from __future__ import annotations" then
+        vim.api.nvim_buf_set_lines(0, 1, 1, false, { "import ipdb" })
+      else
+        vim.api.nvim_buf_set_lines(0, 0, 0, false, { "import ipdb" })
+      end
     end
 
     -- Get the current line's indentation
