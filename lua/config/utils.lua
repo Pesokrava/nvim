@@ -75,8 +75,9 @@ function _G.set_trace()
     local indent = vim.fn.indent(".")
     local spaces = string.rep(" ", indent)
 
-    -- Add 'ipdb.set_trace()' at the current line with the correct indentation
-    vim.api.nvim_put({ spaces .. "ipdb.set_trace()" }, "l", true, true)
+    -- Add 'ipdb.set_trace()' at the line above the cursor with the correct indentation
+    local current_line = vim.api.nvim_win_get_cursor(0)[1]
+    vim.api.nvim_buf_set_lines(0, current_line - 1, current_line - 1, false, { spaces .. "ipdb.set_trace()" })
   end
 end
 
@@ -95,5 +96,4 @@ function _G.clear_trace()
   end
 end
 
-vim.api.nvim_set_keymap("n", "<leader>c", ":lua clear_trace()<CR>", { noremap = true, silent = true })
 return utils
