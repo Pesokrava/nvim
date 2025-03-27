@@ -62,4 +62,16 @@ vim.keymap.set("n", "<leader>cx", function()
 end, { desc = "Hide virtual text LSP" })
 
 -- Key mapping to toggle Neo-tree position with <leader>rt
-vim.api.nvim_set_keymap('n', '<leader>rt', ':lua require("config.utils").Toggle_neotree_position()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>rt",
+  ':lua require("config.utils").Toggle_neotree_position()<CR>',
+  { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fp",
+  ':lua vim.cmd([[let @+=expand("%:p")]])<CR>',
+  { desc = "Copy current file path", noremap = true, silent = true }
+)
