@@ -81,3 +81,10 @@ vim.api.nvim_set_keymap(
   ":lua clear_trace()<CR>",
   { noremap = true, silent = true, desc = "Clear all ipdb breakpoints" }
 )
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fp",
+  ':lua vim.cmd([[let @+=expand("%:p")]])<CR>',
+  { desc = "Copy current file path", noremap = true, silent = true }
+)
