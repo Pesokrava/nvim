@@ -4,7 +4,7 @@ return {
   cmd = "ASToggle", -- optional for lazy loading on command
   event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
   keys = {
-    { "<leader>a", ":ASToggle<CR>", desc = "Toggle auto-save" },
+    { "<leader>ht", ":ASToggle<CR>", desc = "Toggle auto-save" },
   },
   opts = {},
 }
