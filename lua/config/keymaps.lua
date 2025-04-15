@@ -75,3 +75,17 @@ vim.api.nvim_set_keymap(
   ':lua vim.cmd([[let @+=expand("%:p")]])<CR>',
   { desc = "Copy current file path", noremap = true, silent = true }
 )
+
+-- This function toggles the conceal level between 0 and 2
+function toggle_conceal()
+  local level = vim.wo.conceallevel
+  if level == 0 then
+    vim.wo.conceallevel = 2
+  else
+    vim.wo.conceallevel = 0
+  end
+end
+
+-- This binds the function to a key combination, for example <leader>c
+vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>lua toggle_conceal()<CR>', {noremap = true, silent = true})
+
