@@ -85,6 +85,6 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
   "n",
   "<leader>fp",
-  ':lua vim.cmd([[let @+=expand("%:p")]])<CR>',
-  { desc = "Copy current file path", noremap = true, silent = true }
+  ':lua vim.cmd([[let @+=expand("%:p:h")]])<CR>',
+  { desc = "Copy current directory path", noremap = true, silent = true }
 )

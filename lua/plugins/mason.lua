@@ -6,7 +6,7 @@ return {
         "debugpy",
         "pyright",
         "flake8",
-        "black"
+        "ruff"
       },
     },
   },
