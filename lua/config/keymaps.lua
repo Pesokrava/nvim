@@ -71,9 +71,22 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
   "n",
+  "<leader>dw",
+  ":lua set_trace()<CR>",
+  { noremap = true, silent = true, desc = "Ipdb breakpoint" }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>dq",
+  ":lua clear_trace()<CR>",
+  { noremap = true, silent = true, desc = "Clear all ipdb breakpoints" }
+)
+
+vim.api.nvim_set_keymap(
+  "n",
   "<leader>fp",
-  ':lua vim.cmd([[let @+=expand("%:p")]])<CR>',
-  { desc = "Copy current file path", noremap = true, silent = true }
+  ':lua vim.cmd([[let @+=expand("%:p:h")]])<CR>',
+  { desc = "Copy current directory path", noremap = true, silent = true }
 )
 
 -- This function toggles the conceal level between 0 and 2
@@ -87,5 +100,4 @@ function toggle_conceal()
 end
 
 -- This binds the function to a key combination, for example <leader>c
-vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>lua toggle_conceal()<CR>', {noremap = true, silent = true})
-
+vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lua toggle_conceal()<CR>", { noremap = true, silent = true })
