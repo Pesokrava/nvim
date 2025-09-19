@@ -60,7 +60,7 @@ return {
 
           keymaps = {
             send = {
-              modes = { n = { "<CR>, <C-a>" }, i = "<C-a>" },
+              modes = { n = { "<CR>", "<C-a>" }, i = "<C-a>" },
               opts = {},
             },
             close = {
