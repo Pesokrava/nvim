@@ -99,5 +99,21 @@ function toggle_conceal()
   end
 end
 
--- This binds the function to a key combination, for example <leader>c
-vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lua toggle_conceal()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tc",
+  "<cmd>lua toggle_conceal()<CR>",
+  { noremap = true, silent = true, desc = "Toggle Conceal" }
+)
+
+-- Function to toggle between Catppuccin Frappe and Latte themes
+function Toggle_catppuccin_theme()
+  if vim.g.colors_name == "catppuccin-frappe" then
+    vim.cmd("colorscheme catppuccin-latte")
+  else
+    vim.cmd("colorscheme catppuccin-frappe")
+  end
+end
+
+-- Keybinding to toggle Catppuccin themes
+vim.keymap.set("n", "<leader>tt", "<cmd>lua Toggle_catppuccin_theme()<CR>", { desc = "Toggle Catppuccin Theme" })
