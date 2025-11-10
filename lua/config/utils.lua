@@ -96,4 +96,11 @@ function _G.clear_trace()
   end
 end
 
+function utils.copy_relative_path_from_cwd()
+  local file_path = vim.fn.expand("%:p")
+  local relative_path = vim.fn.fnamemodify(file_path, ":.")
+  vim.fn.setreg("+", relative_path)
+  print("Copied: " .. relative_path)
+end
+
 return utils

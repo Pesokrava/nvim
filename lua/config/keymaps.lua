@@ -89,6 +89,14 @@ vim.api.nvim_set_keymap(
   { desc = "Copy current directory path", noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fP",
+  ':lua require("config.utils").copy_relative_path_from_cwd()<CR>',
+  { desc = "Copy relative file path from CWD", noremap = true, silent = true }
+)
+
+
 -- This function toggles the conceal level between 0 and 2
 function toggle_conceal()
   local level = vim.wo.conceallevel
