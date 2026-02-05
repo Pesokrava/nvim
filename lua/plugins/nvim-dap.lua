@@ -26,7 +26,6 @@ return {
       require("dap-python").setup(dpy_path)
     end
     require("nvim-dap-virtual-text").setup({})
-    require("dap-go").setup()
     require("persistent-breakpoints").setup({
       load_breakpoints_event = { "BufReadPost" },
     })
@@ -36,13 +35,13 @@ return {
     dap.adapters.loomi_debugpy = {
       type = "server",
       host = "127.0.0.1",
-      port = 5678,
+      port = 5679,
     }
 
     table.insert(dap.configurations.python, {
       type = "loomi_debugpy",
       request = "attach",
-      name = "Attach to Loomi API (port 5678)",
+      name = "Attach to Loomi API (port 5679)",
       justMyCode = false,
       pathMappings = { {
         localRoot = vim.fn.getcwd(),

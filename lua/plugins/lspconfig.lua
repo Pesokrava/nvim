@@ -32,17 +32,23 @@ return {
           },
         },
 
-        -- Add Go Language Server (gopls) configuration
-        -- gopls = {
-        --   settings = {
-        --     gopls = {
-        --       analyses = {
-        --         unusedparams = true,
-        --       },
-        --       staticcheck = true,
-        --     },
-        --   },
-        -- },
+        -- Go Language Server (gopls) configuration
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+                ST1000 = false, -- Disable package comment requirement
+              },
+              staticcheck = true, -- Keep staticcheck enabled
+              gofumpt = true,
+            },
+          },
+        },
+        -- golangci-lint-langserver will use .golangci.yml from project root
+        golangci_lint_ls = {
+          filetypes = { "go", "gomod" },
+        },
         yamlls = {
           -- Have to add this for yamlls to understand that we support line folding
           capabilities = {

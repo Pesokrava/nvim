@@ -10,6 +10,8 @@ return {
         "shfmt",
         "flake8",
         "stylua",
+        "delve",
+        "gopls",
       },
     },
   },

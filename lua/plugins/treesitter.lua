@@ -8,6 +8,9 @@ return {
         "html",
         "glsl",
         "go",
+        "gomod",
+        "gosum",
+        "gowork",
         "javascript",
         "java",
         "json",
@@ -38,6 +41,6 @@ return {
         "tsx",
         "typescript",
       })
-    end
+    end,
   },
 }

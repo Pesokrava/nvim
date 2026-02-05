@@ -53,17 +53,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.bo.filetype = "groovy"
   end,
 })
--- Autocmd to keep neotree on the right side
-local utils = require('config.utils')
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    -- Check if the argument is a directory
-    local arg = vim.fn.argv(0)
-    if vim.fn.isdirectory(arg) == 1 then
-      utils.Toggle_neotree_position(true)
-    end
-  end,
-})
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 --   pattern = "gruvbox",
 --   callback = function()
