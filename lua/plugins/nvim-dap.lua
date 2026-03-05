@@ -51,6 +51,13 @@ return {
 
     require("nvim-dap-projects").search_project_config()
 
+    -- Dart/Flutter adapter (fallback if flutter-tools doesn't register it)
+    dap.adapters.dart = {
+      type = "executable",
+      command = "flutter",
+      args = { "debug_adapter" },
+    }
+
     -- Setup nvim-dap-view
     dapview.setup({
       auto_toggle = false,
