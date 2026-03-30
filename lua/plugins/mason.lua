@@ -12,6 +12,7 @@ return {
         "stylua",
         "delve",
         "gopls",
+        "codelldb",
       },
     },
   },

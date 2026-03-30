@@ -1,0 +1,61 @@
+# ============================================================
+# .zshrc.example — generic convenience setup (no secrets)
+# ============================================================
+
+
+# ------------------------------------
+# Editor
+# ------------------------------------
+export EDITOR="nvim"
+
+# ------------------------------------
+# Vi mode + custom prompt
+# ------------------------------------
+bindkey -v
+
+function parse_git_branch {
+  git branch 2>/dev/null | grep -e '^\*' | sed -E 's/^\* (.+)/ (\1)/'
+}
+
+PROMPT='%F{blue}%~%F{yellow}$(parse_git_branch) %F{white}$%f '
+
+
+# ------------------------------------
+# Kubernetes helpers
+# ------------------------------------
+alias k=kubectl
+
+# Interactive context switcher (requires fzf)
+function kc() {
+  if [ "$#" -eq 0 ]; then
+    ARG=$(kubectl config get-contexts -o=name | fzf)
+  else
+    ARG=$(kubectl config get-contexts -o=name | fzf -e -1 -q "$1")
+  fi
+  if [ -n "$ARG" ]; then
+    kubectl config use-context "$ARG"
+  fi
+}
+
+
+# ------------------------------------
+# OpenCode / ocx aliases
+# ------------------------------------
+alias oo="ocx opencode"
+alias ouw="ocx opencode --profile ultrawork"
+
+# ------------------------------------
+# Editor aliases
+# ------------------------------------
+alias vi="command nvim"
+alias vim="command nvim"
+
+# ------------------------------------
+# API keys — load from a separate file (never commit that file)
+# ------------------------------------
+# export OPENAI_API_KEY="..."
+# export ANTHROPIC_AUTH_TOKEN="..."
+# export LITELLM_API_KEY="..."
+# export JIRA_API_TOKEN="..."
+# ... or source them from a gitignored file:
+[ -f "$HOME/.env.llm" ] && source "$HOME/.env.llm"

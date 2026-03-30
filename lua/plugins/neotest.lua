@@ -13,6 +13,7 @@ return {
           vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait()
         end,
       },
+      "mrcjkb/rustaceanvim",
     },
     config = function()
       -- Helper function to load environment variables from .env file
@@ -41,6 +42,7 @@ return {
       require("neotest").setup({
         adapters = {
           require("neotest-golang")({ runner = "gotestsum" }),
+          require("rustaceanvim.neotest"),
           require("neotest-python")({
             -- Extra arguments for nvim-dap configuration
             -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
