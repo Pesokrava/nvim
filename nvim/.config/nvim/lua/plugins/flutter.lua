@@ -1,5 +1,8 @@
 return {
   "nvim-flutter/flutter-tools.nvim",
+  cond = function()
+    return vim.fn.executable("flutter") == 1
+  end,
   lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",

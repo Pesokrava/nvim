@@ -2,6 +2,9 @@ return {
   -- rustaceanvim is installed by the lang.rust extra, we just override opts here
   {
     "mrcjkb/rustaceanvim",
+    cond = function()
+      return vim.fn.executable("cargo") == 1
+    end,
     opts = {
       server = {
         on_attach = function(_, bufnr)

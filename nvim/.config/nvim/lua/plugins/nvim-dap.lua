@@ -1,62 +1,84 @@
 -- complete dap config
+-- Language-specific adapters are only configured when their runtime is available.
+local has = vim.fn.executable
+
+local deps = {
+  "nvim-neotest/nvim-nio",
+  "igorlfs/nvim-dap-view",
+  "Weissle/persistent-breakpoints.nvim",
+  "ldelossa/nvim-dap-projects",
+  "theHamsta/nvim-dap-virtual-text",
+}
+
+if has("python3") == 1 then
+  table.insert(deps, "mfussenegger/nvim-dap-python")
+end
+
+if has("go") == 1 then
+  table.insert(deps, "leoluz/nvim-dap-go")
+end
+
 return {
   "mfussenegger/nvim-dap",
-  dependencies = {
-    "nvim-neotest/nvim-nio",
-    "igorlfs/nvim-dap-view",
-    "Weissle/persistent-breakpoints.nvim",
-    "leoluz/nvim-dap-go",
-    "mfussenegger/nvim-dap-python",
-    "ldelossa/nvim-dap-projects",
-    "theHamsta/nvim-dap-virtual-text",
-  },
+  dependencies = deps,
   config = function()
     local dap = require("dap")
     local dapview = require("dap-view")
 
     -- Enable debug logging
     dap.set_log_level("DEBUG")
-    -- Use the project's venv Python for Loomi Agentic API
-    local venv_python = vim.fn.getcwd() .. "/.venv/bin/python"
-    if vim.fn.filereadable(venv_python) == 1 then
-      require("dap-python").setup(venv_python)
-    else
-      -- Fallback to Mason's debugpy
-      local dpy_path = vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
-      require("dap-python").setup(dpy_path)
+
+    -- Python DAP
+    if has("python3") == 1 then
+      local venv_python = vim.fn.getcwd() .. "/.venv/bin/python"
+      if vim.fn.filereadable(venv_python) == 1 then
+        require("dap-python").setup(venv_python)
+      else
+        -- Fallback to Mason's debugpy
+        local dpy_path = vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+        require("dap-python").setup(dpy_path)
+      end
+
+      -- Loomi Agentic API: Direct debugpy adapter (bypasses nvim-dap-python)
+      -- This works with the debugpy server started by `make dev-api-debug`
+      dap.adapters.loomi_debugpy = {
+        type = "server",
+        host = "127.0.0.1",
+        port = 5679,
+      }
+
+      table.insert(dap.configurations.python, {
+        type = "loomi_debugpy",
+        request = "attach",
+        name = "Attach to Loomi API (port 5679)",
+        justMyCode = false,
+        pathMappings = { {
+          localRoot = vim.fn.getcwd(),
+          remoteRoot = vim.fn.getcwd(),
+        } },
+      })
     end
+
+    -- Go DAP
+    if has("go") == 1 then
+      require("dap-go").setup()
+    end
+
+    -- Dart/Flutter adapter
+    if has("flutter") == 1 then
+      dap.adapters.dart = {
+        type = "executable",
+        command = "flutter",
+        args = { "debug_adapter" },
+      }
+    end
+
     require("nvim-dap-virtual-text").setup({})
     require("persistent-breakpoints").setup({
       load_breakpoints_event = { "BufReadPost" },
     })
 
-    -- Loomi Agentic API: Direct debugpy adapter (bypasses nvim-dap-python)
-    -- This works with the debugpy server started by `make dev-api-debug`
-    dap.adapters.loomi_debugpy = {
-      type = "server",
-      host = "127.0.0.1",
-      port = 5679,
-    }
-
-    table.insert(dap.configurations.python, {
-      type = "loomi_debugpy",
-      request = "attach",
-      name = "Attach to Loomi API (port 5679)",
-      justMyCode = false,
-      pathMappings = { {
-        localRoot = vim.fn.getcwd(),
-        remoteRoot = vim.fn.getcwd(),
-      } },
-    })
-
     require("nvim-dap-projects").search_project_config()
-
-    -- Dart/Flutter adapter (fallback if flutter-tools doesn't register it)
-    dap.adapters.dart = {
-      type = "executable",
-      command = "flutter",
-      args = { "debug_adapter" },
-    }
 
     -- Setup nvim-dap-view
     dapview.setup({
