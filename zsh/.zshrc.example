@@ -1,5 +1,5 @@
 # ============================================================
-# .zshrc.example — generic convenience setup (no secrets)
+# .zshrc — shell configuration (managed via ~/dotfiles)
 # ============================================================
 
 
@@ -19,6 +19,18 @@ function parse_git_branch {
 
 PROMPT='%F{blue}%~%F{yellow}$(parse_git_branch) %F{white}$%f '
 
+
+# ------------------------------------
+# Platform-specific
+# ------------------------------------
+case "$(uname)" in
+  Darwin)
+    # macOS-specific setup
+    ;;
+  Linux)
+    # Linux-specific setup
+    ;;
+esac
 
 # ------------------------------------
 # Kubernetes helpers
@@ -43,6 +55,7 @@ function kc() {
 # ------------------------------------
 alias oo="ocx opencode"
 alias ouw="ocx opencode --profile ultrawork"
+export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
 
 # ------------------------------------
 # Editor aliases
