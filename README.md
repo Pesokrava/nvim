@@ -21,7 +21,7 @@ Each top-level directory is a **stow package**. Running `stow nvim` from `~/dotf
 Before installing, check [PREREQUISITES.md](PREREQUISITES.md) for the full list of required tools and runtimes.
 
 ```bash
-git clone git@github.com:Pesokrava/nvim.git ~/dotfiles
+git clone git@github.com:Pesokrava/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
