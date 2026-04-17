@@ -19,6 +19,8 @@ bindkey -v
 function parse_git_branch {
   git branch 2>/dev/null | grep -e '^\*' | sed -E 's/^\* (.+)/ (\1)/'
 }
+plugins=(git docker golang)
+
 
 PROMPT='%F{blue}%~%F{yellow}$(parse_git_branch) %F{white}$%f '
 
