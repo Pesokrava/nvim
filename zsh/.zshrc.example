@@ -8,8 +8,6 @@
 # ------------------------------------
 export EDITOR="nvim"
 
-# proper colors
-export TERM="screen-256color"
 
 # ------------------------------------
 # Vi mode + custom prompt
