@@ -34,6 +34,19 @@ return {
       local hash = vim.fn.sha256(filepath):sub(1, 8)
       local out = "/tmp/nvim-md-preview-" .. hash .. ".html"
 
+      -- Write wrapper files so pandoc emits <div class="markdown-body">
+      -- (the GitHub CSS scopes all rules to that class)
+      local before_file = "/tmp/nvim-md-preview-before.html"
+      local after_file  = "/tmp/nvim-md-preview-after.html"
+      local header_file = "/tmp/nvim-md-preview-header.html"
+      vim.fn.writefile({ '<div class="markdown-body">' }, before_file)
+      vim.fn.writefile({ "</div>" }, after_file)
+      vim.fn.writefile({
+        "<style>",
+        "  body { max-width: 980px; margin: 40px auto; padding: 0 20px; }",
+        "</style>",
+      }, header_file)
+
       local css = ensure_css()
       local cmd = {
         "pandoc",
@@ -43,6 +56,9 @@ return {
         "--embed-resources", -- requires pandoc >= 2.19 (older versions used --self-contained)
         "--resource-path=" .. file_dir,
         "--metadata=title:" .. filename,
+        "--include-before-body=" .. before_file,
+        "--include-after-body=" .. after_file,
+        "--include-in-header=" .. header_file,
       }
       if css then
         table.insert(cmd, "--css=" .. css)
