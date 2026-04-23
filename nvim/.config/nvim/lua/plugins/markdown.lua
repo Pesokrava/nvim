@@ -43,7 +43,8 @@ return {
       vim.fn.writefile({ "</div>" }, after_file)
       vim.fn.writefile({
         "<style>",
-        "  body { max-width: 980px; margin: 40px auto; padding: 0 20px; }",
+        "  body { margin: 0; }",
+        "  .markdown-body { padding: 20px; }",
         "</style>",
       }, header_file)
 
