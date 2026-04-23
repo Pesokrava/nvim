@@ -4,5 +4,10 @@ return {
     window = {
       position = "right",
     },
+    filesystem = {
+      filtered_items = {
+        hide_gitignored = false,
+      },
+    },
   },
 }

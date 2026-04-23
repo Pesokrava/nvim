@@ -55,5 +55,4 @@ if use_osc52() then
       ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
     },
   }
-  vim.opt.clipboard = "unnamedplus"
 end
