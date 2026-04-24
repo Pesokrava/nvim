@@ -88,3 +88,53 @@ done
 echo ""
 echo "Note: ~/.zshrc is NOT managed by stow. Configure it manually per machine."
 echo "      See $DOTFILES_DIR/zsh/.zshrc.example for a reference template."
+
+# ---------------------------------------------------------------------------
+# 4. Append vi mode keybinding to ~/.zshrc if not already present
+# ---------------------------------------------------------------------------
+ZSHRC="$HOME/.zshrc"
+if [ -f "$ZSHRC" ] && grep -qF 'bindkey -v' "$ZSHRC"; then
+  echo "bindkey -v already present in ~/.zshrc, skipping."
+else
+  cat >> "$ZSHRC" << 'EOF'
+
+# Vi mode
+bindkey -v
+EOF
+  echo "Appended 'bindkey -v' to ~/.zshrc"
+fi
+
+if [ -f "$ZSHRC" ] && grep -qF 'alias vi=' "$ZSHRC"; then
+  echo "alias vi already present in ~/.zshrc, skipping."
+else
+  cat >> "$ZSHRC" << 'EOF'
+
+# Aliases
+alias vi="nvim"
+EOF
+  echo "Appended 'alias vi=\"nvim\"' to ~/.zshrc"
+fi
+
+if [ -f "$ZSHRC" ] && grep -qF 'plugins=' "$ZSHRC"; then
+  sed -i.bak 's/^plugins=(.*)/plugins=(brew git docker golang rust)/' "$ZSHRC"
+  echo "Replaced plugins in ~/.zshrc"
+else
+  cat >> "$ZSHRC" << 'EOF'
+
+# Oh-my-zsh plugins
+plugins=(brew git docker golang rust)
+EOF
+  echo "Appended plugins to ~/.zshrc"
+fi
+
+if [ -f "$ZSHRC" ] && grep -qF 'EDITOR=' "$ZSHRC"; then
+  echo "EDITOR already present in ~/.zshrc, skipping."
+else
+  cat >> "$ZSHRC" << 'EOF'
+
+# Default editor
+export EDITOR="nvim"
+EOF
+  echo "Appended 'export EDITOR=\"nvim\"' to ~/.zshrc"
+fi
+
